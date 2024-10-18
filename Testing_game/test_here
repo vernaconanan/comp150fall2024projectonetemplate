@@ -1,0 +1,30 @@
+import pygame
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Game Screen Dimensions
+screen_width, screen_height = 800, 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+
+# Character
+character = pygame.image.load('ralph_sprite.png')  # Add your own sprite
+character_rect = character.get_rect(center=(screen_width//2, screen_height//2))
+
+# Game Loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Game Logic Here
+
+    # Drawing character on the screen
+    screen.fill((0, 0, 0))  # Background color
+    screen.blit(character, character_rect)
+    
+    pygame.display.update()
+
+pygame.quit()
