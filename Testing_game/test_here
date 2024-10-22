@@ -58,3 +58,29 @@ class Inventory:
 inventory = Inventory()
 inventory.add_item("Health Potion", 3)
 inventory.use_item("Health Potion", ralph)
+
+class Inventory:
+    def __init__(self):
+        self.items = {}
+
+    def add_item(self, item_name, quantity):
+        if item_name in self.items:
+            self.items[item_name] += quantity
+        else:
+            self.items[item_name] = quantity
+        print(f"Added {quantity} {item_name}(s) to your inventory.")
+
+    def use_item(self, item_name, character):
+        if item_name in self.items and self.items[item_name] > 0:
+            print(f"{character.name} uses {item_name}.")
+            # Define item effects, e.g., healing:
+            if item_name == "Health Potion":
+                character.vitality += 10
+                print(f"{character.name} regained 10 vitality points!")
+            self.items[item_name] -= 1
+        else:
+            print(f"No {item_name} left in inventory.")
+
+inventory = Inventory()
+inventory.add_item("Health Potion", 3)
+inventory.use_item("Health Potion", ralph)
