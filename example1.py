@@ -8,137 +8,140 @@
     # unique characteristics are encouraged for each character.
 
 # For leveling up new characters can be unlocked as well as coins/ or points added to the players characters. Or possiblilty of when they level up special abilities can be unlocked for a limited time for specific characters'.
-    ## Possible code class for leveling up: *COPILOT*
-        #def level_up(self):
-        #    self.level += 1
-        #    self.strength += 1
-        #    self.dexterity += 1
-        #    self.constitution += 1
-        #    self.vitality += 1
-        #    self.endurance += 1
-        #    self.intelligence += 1
-        #    self.wisdom += 1
-        #    self.knowledge += 1
-        #    self.willpower += 1
-        #    self.spirit += 1
-        #    self.capacity += 1
-        #    print(f"{self.name} leveled up to level {self.level}!")
+    ## Possible code class for leveling up: *COPILOT* added characters could be villians.
+
+def level_up(self):
+    self.level += 1
+    self.strength += 1
+    self.dexterity += 1
+    self.constitution += 1
+    self.vitality += 1
+    self.endurance += 1
+    self.intelligence += 1
+    self.wisdom += 1
+    self.knowledge += 1
+    self.willpower += 1
+    self.spirit += 1
+    self.capacity += 1
+    print(f"{self.name} leveled up to level {self.level}!")
+
 ## Ralph and Fleix would get plugged in here:
-    #ralph = Character("Ralph", 10, 5, 8, 12, 7, 4, 3, 6, 9, 5, 10)
-    #ralph.level_up()
+    ralph = Character("Ralph", 10, 5, 8, 12, 7, 4, 3, 6, 9, 5, 10)
+    ralph.level_up()
 
 ## Possible code for un-eventful scenarios:
 # import random
 
-#class Event:
-#    def __init__(self, description, choices):
-#       self.description = description
-#        self.choices = choices
+class Event:
+    def __init__(self, description, choices):
+       self.description = description
+       self.choices = choices
 
-#    def trigger_event(self, character):
-#        print(self.description)
-#        for i, choice in enumerate(self.choices):
-#            print(f"{i + 1}. {choice['description']}")
-#        choice = int(input("Choose an option: ")) - 1
-#        outcome = self.choices[choice]['outcome']
-#        self.resolve_outcome(character, outcome)
+def trigger_event(self, character):
+        print(self.description)
+        for i, choice in enumerate(self.choices):
+            print(f"{i + 1}. {choice['description']}")
+        choice = int(input("Choose an option: ")) - 1
+        outcome = self.choices[choice]['outcome']
+        self.resolve_outcome(character, outcome)
 
-#    def resolve_outcome(self, character, outcome):
-#        success = random.choice([True, False])  # Simplified success check
-#        if success:
-#            print(outcome['success'])
-#            character.experience += outcome['experience']
-#        else:
-#            print(outcome['failure'])
-#            character.vitality -= outcome['damage']
+def resolve_outcome(self, character, outcome):
+        success = random.choice([True, False])  # Simplified success check
+        if success:
+            print(outcome['success'])
+            character.experience += outcome['experience']
+        else:
+            print(outcome['failure'])
+            character.vitality -= outcome['damage']
 
 ### Scenario example:
-#event = Event(
-#   "A glitch in the system causes chaos!",
-#    [
-#        {"description": "Use Dexterity to navigate through.", "outcome": {"success": "You navigated successfully!", "failure": "You got hurt!", "experience": 10, "damage": 2}},
-#        {"description": "Use Intelligence to stabilize the system.", "outcome": {"success": "You stabilized the system!", "failure": "It didn't work!", "experience": 15, "damage": 3}},
-#    ]
-#)
-#event.trigger_event(ralph)
+event = Event(
+   "A glitch in the system causes chaos!",
+    [
+        {"description": "Use Dexterity to navigate through.", "outcome": {"success": "You navigated successfully!", "failure": "You got hurt!", "experience": 10, "damage": 2}},
+        {"description": "Use Intelligence to stabilize the system.", "outcome": {"success": "You stabilized the system!", "failure": "It didn't work!", "experience": 15, "damage": 3}},
+    ]
+)
 
-#def game_loop():
-##    ralph = Character("Ralph", 10, 5, 8, 12, 7, 4, 3, 6, 9, 5, 10)
-#    events = [
-#        Event(
-#            "A glitch in the system causes chaos!",
-#            [
-#                {"description": "Use Dexterity to navigate through.", "outcome": {"success": "You navigated successfully!", "failure": "You got hurt!", "experience": 10, "damage": 2}},
-#                {"description": "Use Intelligence to stabilize the system.", "outcome": {"success": "You stabilized the system!", "failure": "It didn't work!", "experience": 15, "damage": 3}},
-#            ]
-#        )
-#    ]
+event.trigger_event(Ralph)
 
-#    while ralph.vitality > 0:
-#        event = random.choice(events)
-#        event.trigger_event(ralph)
-#        if ralph.experience >= 20:
-#            ralph.level_up()
-#            ralph.experience = 0
+def game_loop():
+    ralph = Character("Ralph", 10, 5, 8, 12, 7, 4, 3, 6, 9, 5, 10)
+    events = [
+        Event(
+            "A glitch in the system causes chaos!",
+            [
+                {"description": "Use Dexterity to navigate through.", "outcome": {"success": "You navigated successfully!", "failure": "You got hurt!", "experience": 10, "damage": 2}},
+                {"description": "Use Intelligence to stabilize the system.", "outcome": {"success": "You stabilized the system!", "failure": "It didn't work!", "experience": 15, "damage": 3}},
+            ]
+        )
+    ]
 
-#    print("Game Over")
+    while ralph.vitality > 0:
+        event = random.choice(events)
+        event.trigger_event(ralph)
+        if ralph.experience >= 20:
+            ralph.level_up()
+            ralph.experience = 0
 
-#game_loop()
+    print("Game Over")
 
-### LEVEL 6 COPILOT CODE
+game_loop()
+
+### LEVEL 6 COPILOT CODE ** Puzzle **
 #import random
 #import time
 
-#class GearPuzzle:
-#   def __init__(self):
-#        self.gear_sequence = [random.randint(1, 5) for _ in range(5)]  # Random gear sequence
-#        self.player_sequence = [0] * 5  # Player's current sequence
+class GearPuzzle:
+   def __init__(self):
+        self.gear_sequence = [random.randint(1, 5) for _ in range(5)]  # Random gear sequence
+        self.player_sequence = [0] * 5  # Player's current sequence
 
-    #def display_puzzle(self):
-        #print("Current Gear Sequence: ", self.player_sequence)
+def display_puzzle(self):
+    print("Current Gear Sequence: ", self.player_sequence)
     
-    #def input_move(self, index, value):
-        #if 0 <= index < len(self.gear_sequence):
-            #self.player_sequence[index] = value
+def input_move(self, index, value):
+    if 0 <= index < len(self.gear_sequence):
+        self.player_sequence[index] = value
     
-    #def check_solution(self):
-        #return self.player_sequence == self.gear_sequence
+def check_solution(self):
+    return self.player_sequence == self.gear_sequence
 
-#class Enemy:
-    #def __init__(self, name, health):
-     #   self.name = name
-      #  self.health = health
+class Enemy:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
     
-    #def attack(self):
-        #print(f"{self.name} is attacking!")
+    def attack(self):
+        print(f"{self.name} is attacking!")
     
-    #def take_damage(self, damage):
-        #self.health -= damage
-        #if self.health <= 0:
-         #   print(f"{self.name} has been defeated!")
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health <= 0:
+            print(f"{self.name} has been defeated!")
 
-#def main():
-    #puzzle = GearPuzzle()
-    #enemies = [Enemy("Minion", 10) for _ in range(5)]  # Initial set of enemies
+def main():
+    puzzle = GearPuzzle()
+    enemies = [Enemy("Minion", 10) for _ in range(5)]  # Initial set of enemies
 
-    #while not puzzle.check_solution():
-        #puzzle.display_puzzle()
+    while not puzzle.check_solution():
+        puzzle.display_puzzle()
         
         # Felix's turn to make a move
-        #index = int(input("Enter gear index (0-4): "))
-        #value = int(input("Enter gear value (1-5): "))
-        #puzzle.input_move(index, value)
+        index = int(input("Enter gear index (0-4): "))
+        value = int(input("Enter gear value (1-5): "))
+        puzzle.input_move(index, value)
 
         # Ralph's turn to defend
-        #for enemy in enemies:
-            #if enemy.health > 0:
-                #enemy.attack()
-                #time.sleep(1)  # Simulate time taken for Ralph to react
-                #enemy.take_damage(10)  # Ralph's attack damage
+        for enemy in enemies:
+            if enemy.health > 0:
+                enemy.attack()
+                time.sleep(1)  # Simulate time taken for Ralph to react
+                enemy.take_damage(10)  # Ralph's attack damage
                 
-        #print("\n")
+        print("\n")
 
-    #print("Puzzle Solved! Door Unlocked.")
+    print("Puzzle Solved! Door Unlocked.")
 
-#if __name__ == "__main__":
-#   main()
+if __name__ == "__main__":
+    main()
