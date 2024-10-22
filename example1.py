@@ -84,3 +84,61 @@
 #    print("Game Over")
 
 #game_loop()
+
+### LEVEL 6 COPILOT CODE
+#import random
+#import time
+
+#class GearPuzzle:
+#   def __init__(self):
+#        self.gear_sequence = [random.randint(1, 5) for _ in range(5)]  # Random gear sequence
+#        self.player_sequence = [0] * 5  # Player's current sequence
+
+    #def display_puzzle(self):
+        #print("Current Gear Sequence: ", self.player_sequence)
+    
+    #def input_move(self, index, value):
+        #if 0 <= index < len(self.gear_sequence):
+            #self.player_sequence[index] = value
+    
+    #def check_solution(self):
+        #return self.player_sequence == self.gear_sequence
+
+#class Enemy:
+    #def __init__(self, name, health):
+     #   self.name = name
+      #  self.health = health
+    
+    #def attack(self):
+        #print(f"{self.name} is attacking!")
+    
+    #def take_damage(self, damage):
+        #self.health -= damage
+        #if self.health <= 0:
+         #   print(f"{self.name} has been defeated!")
+
+#def main():
+    #puzzle = GearPuzzle()
+    #enemies = [Enemy("Minion", 10) for _ in range(5)]  # Initial set of enemies
+
+    #while not puzzle.check_solution():
+        #puzzle.display_puzzle()
+        
+        # Felix's turn to make a move
+        #index = int(input("Enter gear index (0-4): "))
+        #value = int(input("Enter gear value (1-5): "))
+        #puzzle.input_move(index, value)
+
+        # Ralph's turn to defend
+        #for enemy in enemies:
+            #if enemy.health > 0:
+                #enemy.attack()
+                #time.sleep(1)  # Simulate time taken for Ralph to react
+                #enemy.take_damage(10)  # Ralph's attack damage
+                
+        #print("\n")
+
+    #print("Puzzle Solved! Door Unlocked.")
+
+#if __name__ == "__main__":
+#   main()
