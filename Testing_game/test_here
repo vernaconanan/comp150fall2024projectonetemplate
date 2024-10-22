@@ -1,4 +1,26 @@
 # characters.py
+from scenarios import scenarios
+
+def play_game():
+  while True:
+    for scenario in scenarios:
+      print(scenario["description"])
+
+      # Define choose_character function here (example)
+      def choose_character():
+          # Logic to display characters and allow player selection
+          # ...
+          return chosen_character
+
+      character = choose_character()
+      action = choose_action(scenario["actions"])
+      success = calculate_outcome(character, action, scenario)
+      # ... rest of the code
+
+    if not play_again():
+      break
+
+play_game()
 
 class Character:
     def __init__(self, name, strength, dexterity):
@@ -84,3 +106,307 @@ class Inventory:
 inventory = Inventory()
 inventory.add_item("Health Potion", 3)
 inventory.use_item("Health Potion", ralph)
+
+#Level 6
+def number_lock_puzzle():
+    print("Felix approaches a locked door with a numerical keypad.")
+    print("An inscription reads: 'I am a three-digit number. My tens digit is five more than my ones digit. My hundreds digit is eight less than my tens digit. What number am I?'")
+    
+    correct_answer = 194
+    attempts = 3
+    while attempts > 0:
+        try:
+            player_answer = int(input("Enter the three-digit code to unlock the door: "))
+            if player_answer == correct_answer:
+                print("The door clicks open as Felix enters the correct code!")
+                return True  # Puzzle solved
+            else:
+                attempts -= 1
+                print(f"Incorrect code. Attempts remaining: {attempts}")
+        except ValueError:
+            print("Please enter a valid three-digit number.")
+    
+    print("Felix couldn't solve the puzzle in time. The labyrinth shifts, and a new path must be found.")
+    return False  # Puzzle failed
+
+# Example of integrating the puzzle into the game flow
+puzzle_solved = number_lock_puzzle()
+if puzzle_solved:
+    # Proceed to the next area
+    print("Felix and Ralph proceed deeper into the labyrinth.")
+else:
+    # Redirect to an alternate path or encounter
+    print("They need to find another way around.")
+
+#Level 7
+class Enemy:
+    def __init__(self, name, vitality):
+        self.name = name
+        self.vitality = vitality
+
+    def attack(self, character):
+        damage = 10
+        character.vitality -= damage
+        print(f"{self.name} attacks {character.name} for {damage} damage!")
+
+def combat_sequence(ralph):
+    enemy = Enemy("Infected Soldier", vitality=30)
+    print(f"A wild {enemy.name} appears!")
+
+    while enemy.vitality > 0 and ralph.vitality > 0:
+        action = input("Choose an action: (1) Attack (2) Defend: ")
+        if action == '1':
+            damage = 15
+            enemy.vitality -= damage
+            print(f"{ralph.name} attacks {enemy.name} for {damage} damage!")
+        elif action == '2':
+            print(f"{ralph.name} braces for the attack!")
+            continue
+        else:
+            print("Invalid action.")
+            continue
+
+        if enemy.vitality > 0:
+            enemy.attack(ralph)
+
+    if ralph.vitality <= 0:
+        print(f"{ralph.name} has been defeated!")
+        return False
+    else:
+        print(f"{ralph.name} defeated the {enemy.name}!")
+        return True
+
+# Example usage
+ralph = Character("Ralph", strength=8, repair_skill=1, vitality=100)
+combat_result = combat_sequence(ralph)
+if combat_result:
+    print("They continue on their journey.")
+else:
+    print("Game Over.")
+
+#Level 8
+def logic_puzzle():
+    print("An inscription on the door reads:")
+    print("'I speak without a mouth and hear without ears. I have nobody, but I come alive with the wind. What am I?'")
+    
+    correct_answer = "echo"
+    attempts = 2
+    while attempts > 0:
+        player_answer = input("Enter your answer: ").lower()
+        if player_answer == correct_answer:
+            print("The door unlocks as Felix solves the riddle!")
+            return True
+        else:
+            attempts -= 1
+            print(f"Incorrect. Attempts remaining: {attempts}")
+    
+    print("Felix couldn't solve the riddle. A trap is triggered!")
+    return False
+
+# Integrate into game flow
+puzzle_solved = logic_puzzle()
+if puzzle_solved:
+    print("They ascend to the next floor.")
+else:
+    print("They must deal with the consequences.")
+
+#Level 9
+def circuit_puzzle():
+    print("Felix encounters a circuit board with colored wires.")
+    print("He must connect the correct wires to reroute the power.")
+    print("Available wires: Red, Blue, Green, Yellow")
+    correct_connections = {"Red": "Green", "Blue": "Yellow"}
+    
+    attempts = 3
+    while attempts > 0:
+        wire1 = input("Choose the first wire to connect: ").capitalize()
+        wire2 = input("Choose the wire to connect it to: ").capitalize()
+        if wire1 in correct_connections and correct_connections[wire1] == wire2:
+            print("Correct connection made!")
+            del correct_connections[wire1]
+            if not correct_connections:
+                print("All connections made successfully! The firewall node is disabled.")
+                return True
+        else:
+            attempts -= 1
+            print(f"Incorrect connection. Attempts remaining: {attempts}")
+    
+    print("Felix failed to reroute the power in time. The firewall strengthens.")
+    return False
+
+# Integrate into game flow
+puzzle_solved = circuit_puzzle()
+if puzzle_solved:
+    print("They proceed towards the core.")
+else:
+    print("Security protocols activate additional defenses.")
+
+#Level 10
+import time
+import random
+
+class Character:
+    def __init__(self, name, strength, dexterity):
+        self.name = name
+        self.strength = strength
+        self.dexterity = dexterity
+        self.health = 100
+    
+    def attack(self, target, phase):
+        if phase == 1:
+            print(f"{self.name} is trying to break the boss's shield!")
+            if random.randint(0, 1):
+                damage = self.strength * random.randint(5, 10)
+                target.take_damage(damage)
+                print(f"{self.name} dealt {damage} damage to the boss's shield!")
+            else:
+                print(f"{self.name} missed!")
+        elif phase == 3:
+            print(f"{self.name} is attacking the virus core!")
+            if random.randint(0, 1):
+                damage = self.strength * random.randint(5, 15)
+                target.take_damage(damage)
+                print(f"{self.name} dealt {damage} damage to the virus core!")
+            else:
+                print(f"{self.name} missed!")
+                
+    def take_damage(self, damage):
+        self.health -= damage
+        print(f"{self.name} took {damage} damage! Remaining health: {self.health}")
+
+class Boss:
+    def __init__(self, name):
+        self.name = name
+        self.shield_health = 100
+        self.core_health = 100
+    
+    def take_damage(self, damage):
+        if self.shield_health > 0:
+            self.shield_health -= damage
+            print(f"{self.name}'s shield is at {self.shield_health} health.")
+        else:
+            self.core_health -= damage
+            print(f"{self.name}'s core is at {self.core_health} health.")
+            
+    def is_defeated(self):
+        return self.core_health <= 0
+    
+    def phase_attack(self, character, phase):
+        if phase == 1:
+            print(f"{self.name} launches a powerful attack!")
+            damage = random.randint(5, 15)
+            character.take_damage(damage)
+        elif phase == 2:
+            print(f"{self.name} sends minions to attack {character.name}!")
+            damage = random.randint(3, 8)
+            character.take_damage(damage)
+        elif phase == 3:
+            print(f"{self.name} attacks with all its power!")
+            damage = random.randint(10, 20)
+            character.take_damage(damage)
+
+def timed_button_press():
+    # Reflex test - hit Enter within a small random window
+    print("Press Enter when you see 'NOW'!")
+    time.sleep(random.uniform(1, 3))  # Random delay
+    print("NOW!")
+    start_time = time.time()
+    input()
+    end_time = time.time()
+    
+    if 0.1 <= (end_time - start_time) <= 0.4:  # Within the right reflex window
+        print("Perfect timing!")
+        return True
+    else:
+        print("Too slow!")
+        return False
+
+def phase_one(ralph, boss):
+    print("Phase 1: Ralph must break the shield while dodging power attacks!")
+    start_time = time.time()
+    while boss.shield_health > 0 and ralph.health > 0:
+        if timed_button_press():  # Reflex action to dodge and attack
+            ralph.attack(boss, phase=1)
+        boss.phase_attack(ralph, phase=1)
+        
+        if time.time() - start_time > 30:  # Time limit for this phase
+            print("Phase 1 time over!")
+            break
+
+def phase_two(felix, boss):
+    print("Phase 2: Felix must solve a puzzle and avoid virus-infected minions!")
+    start_time = time.time()
+    while felix.health > 0:
+        print("Solve the puzzle: Unscramble the word!")
+        puzzle_word = "virus"
+        scrambled_word = ''.join(random.sample(puzzle_word, len(puzzle_word)))
+        print(f"Scrambled word: {scrambled_word}")
+        guess = input("Your guess: ").strip().lower()
+        if guess == puzzle_word:
+            print("Correct! Felix gains a power-up!")
+            break
+        else:
+            print("Wrong! Try again!")
+        
+        boss.phase_attack(felix, phase=2)
+        
+        if time.time() - start_time > 30:  # Time limit for this phase
+            print("Phase 2 time over!")
+            break
+
+def phase_three(ralph, felix, boss):
+    print("Phase 3: Combination of combat and puzzle-solving!")
+    start_time = time.time()
+    while boss.core_health > 0 and (ralph.health > 0 or felix.health > 0):
+        if random.choice([True, False]):
+            # Ralph's turn to attack
+            print("Switching to Ralph for brute force attack!")
+            if timed_button_press():  # Reflex action for Ralph's attack
+                ralph.attack(boss, phase=3)
+            else:
+                print("Ralph's attack missed!")
+            boss.phase_attack(ralph, phase=3)
+        else:
+            # Felix's turn to solve a puzzle
+            print("Switching to Felix for a puzzle solution!")
+            puzzle_word = "core"
+            scrambled_word = ''.join(random.sample(puzzle_word, len(puzzle_word)))
+            print(f"Scrambled word: {scrambled_word}")
+            guess = input("Your guess: ").strip().lower()
+            if guess == puzzle_word:
+                print("Felix deactivates part of the virus code!")
+                boss.take_damage(20)  # Deal damage by solving puzzles
+            else:
+                print("Wrong! Felix failed!")
+            boss.phase_attack(felix, phase=3)
+        
+        if time.time() - start_time > 30:  # Time limit for this phase
+            print("Phase 3 time over!")
+            break
+
+# Initialize characters and boss
+ralph = Character("Ralph", strength=10, dexterity=5)
+felix = Character("Felix", strength=5, dexterity=10)
+final_boss = Boss("Virus Boss")
+
+# Start the final boss battle
+print("Final Boss Battle Begins!")
+
+# Phase 1: Ralph breaks the shield
+phase_one(ralph, final_boss)
+
+# Phase 2: Felix solves puzzles and avoids enemies
+if final_boss.shield_health <= 0:
+    print("The boss's shield is down! Moving to Phase 2.")
+    phase_two(felix, final_boss)
+
+# Phase 3: Both characters alternate to defeat the virus core
+if final_boss.shield_health <= 0 and felix.health > 0:
+    print("Moving to Phase 3: The final showdown!")
+    phase_three(ralph, felix, final_boss)
+
+# Check if the boss was defeated
+if final_boss.is_defeated():
+    print("Congratulations! You have defeated the final boss and saved the game!")
+else:
+    print("The boss wasn't defeated in time! Game over.")
