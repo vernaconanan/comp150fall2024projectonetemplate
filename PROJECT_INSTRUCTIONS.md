@@ -69,3 +69,6 @@ This project is expected to take **36-54 hours** total. Since you'll be working 
     - **`test/`**: Unit tests to ensure your code is working as expected. Aim for **60-80% code coverage**. Use tools like `pytest` or `unittest`.
 
 ---
+
+prof's chat: https://chatgpt.com/share/6718396a-083c-8012-9e1d-df985bfc3219
+
