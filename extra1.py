@@ -53,6 +53,11 @@ class Game:
         self.ralph = Character("Ralph", vitality=20)
         self.inventory = Inventory()
 
+    def __init__(self):
+        self.ralph = Character("Ralph", vitality=20)
+        self.felix = Character("Felix", vitality=15)  # Add Felix here
+        self.inventory = Inventory()
+
     def start_level_1(self):
         print("Welcome to Level 1: The Tutorial")
         self.ralph.break_obstacle()
@@ -178,8 +183,74 @@ class Game:
             else:
                 print("Invalid input or no more actions left for this character.")
 
+    import time
+    import random
+
+    def start_level_10(self):
+        print("Welcome to Level 10: The Final Boss - The Source of the Virus")
+        
+        # Phase 1: Ralph breaks the shield while dodging attacks
+        print("\nPhase 1: Ralph must break the shield while dodging power attacks.")
+        shield_strength = 3  # Number of obstacles to break
+        while shield_strength > 0:
+            action = input("Press 'b' to have Ralph break the shield or 'd' to dodge an attack: ").lower()
+            if action == 'b':
+                self.ralph.break_obstacle()
+                shield_strength -= 1
+                print(f"Shield strength remaining: {shield_strength}")
+            elif action == 'd':
+                print("Ralph dodged an attack!")
+            else:
+                print("Invalid input! Press 'b' to break the shield or 'd' to dodge.")
+        
+        print("Phase 1 Complete! Ralph broke the shield.")
+        
+        # Phase 2: Felix solves a complex problem while avoiding virus-infected minions (Timed)
+        print("\nPhase 2: Felix is solving a complex problem while avoiding the boss's minions.")
+        minions_to_avoid = 5
+        start_time = time.time()
+        while minions_to_avoid > 0:
+            action = input("Press 's' to solve the puzzle or 'd' to dodge a minion: ").lower()
+            elapsed_time = time.time() - start_time
+            if elapsed_time > 30:
+                print("Time’s up! The boss overwhelmed Felix!")
+                return  # End game if time runs out
+            if action == 's':
+                minions_to_avoid -= 1
+                print(f"Puzzle progress made. Remaining minions to avoid: {minions_to_avoid}")
+            elif action == 'd':
+                print("Felix dodged a minion attack!")
+            else:
+                print("Invalid input! Press 's' to solve or 'd' to dodge.")
+        
+        print("Phase 2 Complete! Felix solved the puzzle and avoided the minions.")
+        
+        # Phase 3: Alternating between Ralph and Felix to defeat the boss (Timed and Reflex-based)
+        print("\nPhase 3: Alternating characters to combat the virus.")
+        rounds_remaining = 5
+        while rounds_remaining > 0:
+            current_character = "Ralph" if rounds_remaining % 2 != 0 else "Felix"
+            start_phase_time = time.time()
+            print(f"\n{current_character}'s turn!")
+            if current_character == "Ralph":
+                input("Press 'b' for Ralph to attack the virus! ")
+            else:
+                input("Press 'h' for Felix to deactivate a virus code! ")
+            
+            # Check timing for reflex-based gameplay
+            elapsed_phase_time = time.time() - start_phase_time
+            if elapsed_phase_time <= 3:
+                print(f"{current_character} succeeded with precise timing!")
+                rounds_remaining -= 1
+            else:
+                print(f"{current_character} was too slow! Try again.")
+            
+        print("\nPhase 3 Complete! The virus has been defeated. Congratulations, you’ve completed the game!")
+
+    
+
     def run(self):
-        levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5, self.start_level_6, self.start_level_7, self.start_level_8, self.start_level_9]
+        levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5, self.start_level_6, self.start_level_7, self.start_level_8, self.start_level_9, self.start_level_10]
         for level in levels:
             level()
 
