@@ -179,7 +179,7 @@ class Game:
                 print("Invalid input or no more actions left for this character.")
 
     def run(self):
-        levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5]
+        levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5, self.start_level_6, self.start_level_7, self.start_level_8, self.start_level_9]
         for level in levels:
             level()
 
