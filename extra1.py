@@ -110,7 +110,7 @@ class Game:
             if action == 'p':
                 puzzles_solved += 1
                 print(f"Solved puzzle {puzzles_solved} of {total_puzzles}")
-                
+
     def start_level_6(self):
         print("Welcome to Level 6: Solving Puzzles and Finding the Hammer")
         puzzles_solved = 0
@@ -126,6 +126,57 @@ class Game:
                 self.ralph.break_obstacle()
             else:
                 print("Invalid input! Please press 'p' for puzzle or 'b' to break obstacles.")
+    
+    def start_level_7(self):
+        print("Welcome to Level 7: Healing Infected Characters")
+        monsters_defeated = 0
+        infected_characters = 3
+        while infected_characters > 0:
+            action = input("Press 'f' to have Felix heal or 'r' for Ralph to fight monsters: ").lower()
+            if action == 'f':
+                infected_characters -= 1
+                print(f"Felix healed an infected character! Remaining: {infected_characters}")
+                self.felix.gain_powerup()
+            elif action == 'r':
+                monsters_defeated += 1
+                print(f"Ralph is fighting monsters! Monsters defeated: {monsters_defeated}")
+                self.ralph.gain_powerup()
+            else:
+                print("Invalid input! Please press 'f' to heal or 'r' to fight.")
+
+    def start_level_8(self):
+        print("Welcome to Level 8: Combat and Repairs")
+        repairs_needed = 3
+        waves_of_monsters = 3
+        while repairs_needed > 0 or waves_of_monsters > 0:
+            action = input("Press 'f' for Felix to repair or 'r' for Ralph to fight waves: ").lower()
+            if action == 'f' and repairs_needed > 0:
+                repairs_needed -= 1
+                print(f"Felix repaired a corrupted area! Remaining repairs: {repairs_needed}")
+                self.felix.gain_powerup()
+            elif action == 'r' and waves_of_monsters > 0:
+                waves_of_monsters -= 1
+                print(f"Ralph defeated a wave of monsters! Waves remaining: {waves_of_monsters}")
+                self.ralph.gain_powerup()
+            else:
+                print("Invalid input or no more actions left for this character.")
+
+    def start_level_9(self):
+        print("Welcome to Level 9: Combat with Mini Bosses and Puzzle Solving")
+        bosses_remaining = 3
+        locked_doors = 2
+        while bosses_remaining > 0 or locked_doors > 0:
+            action = input("Press 'r' for Ralph to fight mini bosses or 'f' for Felix to solve puzzles: ").lower()
+            if action == 'r' and bosses_remaining > 0:
+                bosses_remaining -= 1
+                print(f"Ralph defeated a mini boss! Bosses remaining: {bosses_remaining}")
+                self.ralph.level_up()  # Double reward
+            elif action == 'f' and locked_doors > 0:
+                locked_doors -= 1
+                print(f"Felix solved a puzzle and unlocked a door! Locked doors remaining: {locked_doors}")
+                self.felix.gain_powerup()
+            else:
+                print("Invalid input or no more actions left for this character.")
 
     def run(self):
         levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5]
