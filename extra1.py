@@ -67,9 +67,16 @@ class Game:
                 self.ralph.break_obstacle()
                 infected_characters -= 1
                 self.ralph.gain_powerup()
+                print(f"Infected characters left to save: {infected_characters}")
             elif action == 's':
                 print("Searching for obstacles...")
                 time.sleep(1)
+            else:
+                print("Invalid input! Please press 'b' to break an obstacle or 's' to skip.")
+
+        # When all infected characters are saved, break the loop and proceed
+        print("All infected characters have been saved! Proceeding to the next level...\n")
+
 
     def start_level_3(self):
         print("Welcome to Level 3: Finding the Back Staircase")
@@ -103,6 +110,22 @@ class Game:
             if action == 'p':
                 puzzles_solved += 1
                 print(f"Solved puzzle {puzzles_solved} of {total_puzzles}")
+                
+    def start_level_6(self):
+        print("Welcome to Level 6: Solving Puzzles and Finding the Hammer")
+        puzzles_solved = 0
+        total_puzzles = 3
+        while puzzles_solved < total_puzzles:
+            action = input("Press 'p' to have Felix solve a puzzle or 'b' to have Ralph break an obstacle: ").lower()
+            if action == 'p':
+                puzzles_solved += 1
+                print(f"Felix solved puzzle {puzzles_solved} of {total_puzzles}.")
+                if puzzles_solved == total_puzzles:
+                    print("Felix has found his hammer!")
+            elif action == 'b':
+                self.ralph.break_obstacle()
+            else:
+                print("Invalid input! Please press 'p' for puzzle or 'b' to break obstacles.")
 
     def run(self):
         levels = [self.start_level_1, self.start_level_2, self.start_level_3, self.start_level_4, self.start_level_5]
