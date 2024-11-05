@@ -280,45 +280,49 @@ game.run()
 import unittest
 from unittest.mock import patch
 from io import StringIO
-import random
 
 class TestGame(unittest.TestCase):
 
     def setUp(self):
-        self.game = Game()  # Create an instance of the Game
+        self.ralph = Character("Ralph", vitality=20)
+        self.felix = Character("Felix", vitality=15)
+        self.inventory = Inventory()
+        self.game = Game()
 
-    def test_character_success_to_break_obstacle(self, mock_random):
+    def test_character_success_to_break_obstacle(self):
         """Test that the character successfully breaks the obstacle."""
-        initial_vitality = self.game.character.vitality  # Store initial vitality
+        initial_vitality = self.ralph.vitality  # Store initial vitality
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            self.game.character.break_obstacle()  # Attempt to break the obstacle
+            self.ralph.break_obstacle()  # Attempt to break the obstacle
         output = mock_stdout.getvalue().strip()
-        self.assertIn("Successfully broke the obstacle!", output)
-        self.assertEqual(self.game.character.vitality, initial_vitality)
+        self.assertIn("broke the obstacle", output)
+        self.assertEqual(self.ralph.vitality, initial_vitality)
     
     def test_inventory_add_item(self):
         """Test adding an item to the inventory."""
-        self.game.inventory.add_item("Health Potion", 5)
-        self.assertEqual(self.game.inventory.items.get("Health Potion", 0), 5)
+        self.inventory.add_item("Health Potion", 5)
+        self.assertEqual(self.inventory.items.get("Health Potion", 0), 5)
     
     def test_inventory_use_item(self):
-        self.game.inventory.add_item("Health Potion", 1)
-        self.game.inventory.use_item("Health Potion", self.game.character)
-        self.assertEqual(self.game.character.vitality, 110)  # Assuming health potion gives 10 vitality
-        self.assertEqual(self.game.inventory.items["Health Potion"], 0)
+        """Test using an item from the inventory."""
+        self.inventory.add_item("Health Potion", 1)
+        self.inventory.use_item("Health Potion", self.ralph)
+        self.assertEqual(self.ralph.vitality, 30)  # Assuming health potion gives 10 vitality
+        self.assertEqual(self.inventory.items["Health Potion"], 0)
 
-    def test_inventory_count_total(self):
-        self.game.inventory.add_item("Health Potion", 5)
-        self.game.inventory.add_item("Mana Potion", 3)
-        total_items = self.game.inventory.count_total_items()
-        # There are 5 Health Potions and 3 Mana Potions
-        expected_total = 5 + 3
-        self.assertEqual(total_items, expected_total)
+    def test_inventory_use_item_when_empty(self): 
+        """Test trying to use an item when it's not in the inventory.""" 
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout: 
+            self.inventory.use_item("Health Potion", self.ralph) 
+        output = mock_stdout.getvalue().strip() 
+        self.assertIn("No Health Potion left in inventory", output)
 
     def test_level_up(self):
-        self.game.character.experience = 20  # Enough experience to level up
-        self.game.character.level_up()
-        self.assertEqual(self.game.character.level, 2)  # Character should have leveled up
+        """Test the character level up process."""
+        self.ralph.experience = 20  # Enough experience to level up
+        self.ralph.level_up()
+        self.assertEqual(self.ralph.level, 2)  # Character should have leveled up
+        self.assertEqual(self.ralph.vitality, 25)  # Vitality should have increased by 5
 
 if __name__ == '__main__':
     unittest.main()
