@@ -330,6 +330,8 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.character.level, current_level + 1)
         self.assertEqual(self.game.character.vitality, 25)  # Vitality should increase by 5
 pass 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
+    # Run the tests
     print("\nRunning Unit Tests...")
     unittest.main(argv=[''], verbosity=2, exit=False)
