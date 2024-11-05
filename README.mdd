@@ -1,0 +1,140 @@
+Wreck-it-Ralph: The Virus Chronicles
+Introduction:
+
+In the bustling and vibrant world inside the arcade, a sinister virus has begun to spread, threatening to turn beloved game characters into monstrous versions of themselves. 
+Chaos ensues as characters, who once brought joy to countless players, now wreak havoc under the virus's influence.
+Our story begins with Ralph, a character known for his brute strength but also his big heart. 
+As Ralph looks out over his rapidly deteriorating game world, he realizes that it's up to him to save his friends and restore order. 
+But he can't do it alone. Locked away and in need of rescue is Felix, the clever and resourceful handyman whose hammer holds the antidote to cure the infected characters.
+This compelling narrative draws players into a world of adventure, teamwork, and heroism, echoing the spirit of Ralph and Felix. 
+Ready to save the arcade? Let's get started!
+
+## How to Run the Project:
+Follow steps below to access and run our game.
+### Prerequisites
+- Python 3.12.6 installed on your machine.
+
+### Steps to Run:
+
+1. Clone or download the project to your local machine.
+
+2. Navigate to the project root directory (assumed to be named `comp150fall2024projectonetemplate`):
+
+   ```bash
+   cd comp150fall2024projectonetemplate
+   ```
+
+3. Run the game using Python:
+
+   ```bash
+   python project_code/src/main.py
+   ```
+
+### Game Flow:
+Wreck-it-Ralph: The Virus Chronicles is a ten level game that will prompt you to select choices to unlock special abilities, character: Felix, tools and power-ups that will benefit players in antidoting beloved characters and beating the villians who have infected our arcade game.
+- The game will prompt you put yourself in to Ralph's shoes and make a choice to wreck your way through obstacles to help save the day. Resolving various in-game events, when you break through an obstacle Ralph gains a power-up adding vitality and unique prizes to his character's inventory to help beat the three phases of bosses in later levels.
+- Players will then navigate through the levels to help rescue Felix and his antidote hammer to reverse the virus in other arcade characters. Once unlocked players have the option to play alternating between both Felix and Ralph comprehensively through levels.
+- Follow the instructions displayed in the terminal to play through the game.
+-	Level One: Tutorial Players step into Ralph's shoes, navigating through the first challenge—a comprehensive tutorial that introduces the mechanics of breaking obstacles and finding power-ups. The story reveals the origin of the virus and sets the stakes: without intervention, the entire arcade could be corrupted.
+-	Level Two: Freeing Non-Infected Characters Ralph's mission intensifies as he traverses through levels, breaking obstacles to free non-infected characters. Along the way, he discovers Felix is also imprisoned, and the path to saving the arcade becomes clearer—Felix must be freed to use his skills against the virus.
+-	Level Three: Challenges and Power-Ups In his quest to find Felix, Ralph faces numerous challenges. He must destroy debris, overcome traps, and gather power-ups that will aid in the upcoming battles. The journey takes him to a hidden staircase, leading deeper into the infected regions.
+-	Level Four: Unlocking Felix Ralph's determination pays off as he locates Felix behind bars. However, there's a twist—Felix's hammer, essential for curing the infected, has been taken. The duo must now embark on a quest to recover it.
+-	Level Five: Puzzle-Solving with Felix Players can now switch to Felix, whose intelligence and problem-solving skills come to the fore. With Ralph as a backup, Felix must solve word scrambles and other puzzles to gain power-ups, pushing the narrative forward.
+-	Level Six: The Search for the Hammer The dynamic duo works together, blending brute force with brain power. While Ralph breaks obstacles, Felix solves puzzles, eventually reclaiming his hammer by deciphering complex riddles.
+-	Level Seven: Healing the Infected With the hammer back in hand, Felix can now heal infected characters. Ralph takes on the role of protector, smashing the monsters that threaten Felix as he works his magic.
+-	Level Eight: Combat and Repairs As the game progresses, players alternate between Ralph and Felix. Ralph battles waves of monsters, while Felix focuses on repairing corrupted areas and disabling virus traps.
+-	Level Nine: Prepping for the Final Boss The difficulty ramps up as Felix repairs locked doors and bridges while Ralph combats mini-bosses. Victories in these battles double their stats, prepping them for the final showdown.
+-	Level Ten: Final Boss Battle The climax of their journey—Phase 1 sees Ralph breaking through a shield while dodging attacks. Phase 2 is a race against time as Felix solves a complex problem amidst a swarm of virus-infected minions. In the final phase, players must alternate between Ralph's brute force and Felix's hammer to deactivate the virus code and ultimately defeat the boss.
+
+### The Tutorial:
+After running the code, players will be prompt with the saying, "Welcome to level 1: The Tutorial. Ralph is breaking an obstacle... Ralph broke the obstacle!"
+
+- Learning Ralph has now obstained a power-up after breaking the obstacle we can now move forward to our series of prompts to navigate through the levels.
+
+
+Level 2: Welcomes players & gives instructions of which important keys to press. Players will see:
+
+```
+
+Ralph gained a power-up! Total power-ups: 1
+Welcome to Level 2: Freeing Felix
+Press 'b' to break an obstacle or 's' to skip:
+
+```
+Simply follow the prompts pressing offered keys and see the outcomes.
+
+## Running Unit Tests:
+
+To run the provided unit tests, we recommend using `pytest`, a testing framework for Python.
+
+#### Steps to Run Tests:
+
+1. First, make sure `pytest` is installed on your machine:
+
+   ```bash
+   pip install pytest
+   ```
+
+2. Run the tests by navigating to the project root and executing the following command:
+
+   ```bash
+   pytest
+   ```
+
+This will discover and run all the tests in the `test/` directory.
+
+### Example Test Output:
+
+After running the tests, you should see output like this:
+
+```
+Phase 3 complete! The virus has been defeated. Congratulations, you won the game!
+.Added 5 Health Potion(s) to your intentory.
+.Added 1 Health Potion(s) to your intentory.
+Ralph uses Health Potion.
+Ralph regains 10 vitality points!
+.. Ralph leveled up to level 2! Vitality is now 25.
+.
+-----------------------------------------------------------------------------------
+
+test/test_game.py ...                                                     [100%]
+
+============================== Ran 5 tests in 0.05s ===============================
+OK.
+```
+
+### Project Structure
+
+Here is the project directory structure:
+
+```
+.
+├── PROJECT_INSTRUCTIONS.md
+├── README.mdd
+├── __init__.py
+└── project_code
+    ├── __init__.py
+    ├── location_events
+    │   └── location_1.json
+    ├── src
+    │   ├── __init__.py
+    │   └── main.py
+    └── test
+        ├── __init__.py
+        └── test_game.py
+```
+
+- `project_code/` - The main directory containing all the code for the project.
+    - `location_events/` - Directory containing the JSON files with events for the game.
+    - `src/` - Source code for the project.
+    - `test/` - Directory for tests to ensure the game functions correctly.
+- `README.md` - This file, with instructions on how to run the project.
+- `PROJECT_INSTRUCTIONS.md` - Additional instructions or guidelines for the project.
+
+---
+
+Can You Defeat The Virus!?
+:)
+
+
+
