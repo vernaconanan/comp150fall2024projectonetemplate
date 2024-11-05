@@ -267,3 +267,63 @@ if __name__ == "__main__":
     game = Game()
     game.start_level_5()
 #### Felix is solving puzzles and Ralph is assisting while wrecking obtascles.
+
+import unittest
+
+class TestGame(unittest.TestCase):
+
+    def setUp(self):
+        self.ralph = Character("Ralph", vitality=20)
+        self.felix = Character("Felix", vitality=15)
+
+    def test_level_up(self):
+        self.ralph.experience = 20
+        self.ralph.level_up()
+        self.assertEqual(self.ralph.level, 2)
+        self.assertEqual(self.ralph.vitality, 25)
+
+    def test_break_obstacle(self):
+        # Testing method with just a print statement, so using mock for print
+        with unittest.mock.patch('builtins.print') as mocked_print:
+            self.ralph.break_obstacle()
+            mocked_print.assert_any_call("Ralph is breaking an obstacle...")
+            mocked_print.assert_any_call("Ralph broke the obstacle!\n")
+
+    def test_gain_powerup(self):
+        self.ralph.gain_powerup()
+        self.assertEqual(self.ralph.powerups, 1)
+        self.ralph.gain_powerup()
+        self.assertEqual(self.ralph.powerups, 2)
+
+    def test_event_trigger(self):
+        description = "A wild obstacle appears!"
+        choices = [
+            {"description": "Break the obstacle", "outcome": {"success": "Obstacle broken!", "failure": "Failed to break the obstacle!", "experience": 10, "damage": 5}},
+            {"description": "Avoid the obstacle", "outcome": {"success": "Avoided successfully!", "failure": "Could not avoid!", "experience": 5, "damage": 2}}
+        ]
+        event = event(description, choices)
+        with unittest.mock.patch('builtins.input', return_value='1'):
+            with unittest.mock.patch('builtins.print'):
+                event.trigger_event(self.ralph)
+        self.assertEqual(self.ralph.experience, 10)
+
+    def test_game_levels(self):
+        game = Game()
+        with unittest.mock.patch('builtins.print'):
+            game.start_level_1()
+            self.assertEqual(game.ralph.powerups, 1)
+
+            game.start_level_2()
+            self.assertGreaterEqual(game.ralph.powerups, 1)
+
+            game.start_level_3()
+            self.assertGreaterEqual(game.ralph.powerups, 1)
+
+            game.start_level_4()
+            # Continue adding assertions for different levels based on game requirements
+
+if __name__ == '__main__':
+    unittest.main()
+
+## RUN CODE WITH THIS:
+   # python -m unittest discover -s tests

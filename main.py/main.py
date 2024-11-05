@@ -275,3 +275,60 @@ class Inventory:
 # Initialize and run the game
 game = Game()
 game.run()
+
+# -- Unit Test Code --
+import unittest
+from unittest.mock import patch
+from io import StringIO
+import random
+
+class TestGame(unittest.TestCase):
+
+    def setUp(self):
+        """Set up the test environment for the game"""
+        self.game = Game()
+
+    @patch('random.choice', return_value=False)  # Simulate failure in breaking the obstacle
+    def test_character_fail_to_break_obstacle(self, mock_random):
+        """Test that the character fails to break the obstacle."""
+        initial_vitality = self.game.character.vitality
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            self.game.character.break_obstacle()  # Attempt to break the obstacle
+            
+        output = mock_stdout.getvalue().strip()
+        self.assertIn("failed to break the obstacle", output)
+        self.assertEqual(self.game.character.vitality, initial_vitality - 1)  # Vitality should decrease by 1
+
+    def test_inventory_add_item(self):
+        """Test adding an item to the inventory."""
+        self.game.inventory.add_item("Health Potion", 5)
+        self.assertEqual(self.game.inventory.items.get("Health Potion", 0), 5)
+
+    def test_inventory_use_item(self):
+        """Test using an item from the inventory."""
+        self.game.inventory.add_item("Health Potion", 1)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            self.game.inventory.use_item("Health Potion", self.game.character)
+        
+        output = mock_stdout.getvalue().strip()
+        self.assertIn("Ralph uses Health Potion", output)
+        self.assertEqual(self.game.character.vitality, 30)  # Assuming vitality starts at 20 and potion adds 10
+
+    def test_inventory_use_item_when_empty(self):
+        """Test trying to use an item when it's not in the inventory."""
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            self.game.inventory.use_item("Health Potion", self.game.character)
+        
+        output = mock_stdout.getvalue().strip()
+        self.assertIn("No Health Potion left in inventory", output)
+
+    def test_level_up(self):
+        """Test the character leveling up after gaining enough experience."""
+        self.game.character.experience = 20  # Enough to level up
+        current_level = self.game.character.level
+        self.game.character.level_up()
+        self.assertEqual(self.game.character.level, current_level + 1)
+        self.assertEqual(self.game.character.vitality, 25)  # Vitality should increase by 5
+
+print("\nRunning Unit Tests...")
+unittest.main(argv=[''], verbosity=2, exit=False)
